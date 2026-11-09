@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <vector>
 #include <ctime>
 
@@ -48,9 +49,9 @@ void deposit(double balance, string name)
     cout<<"                                CASH DEPOSIT RECEIPT"<<endl<<endl;
     cout<<" TRANSACTION DATE   "<<ctime(&now)<<endl;
     cout<<" BUSINESS DATE      "<<ctime(&now)<<endl<<endl;
-    cout<<" CUSTOMER NAME   "<<name[0]<<" "<<surname<<endl<<endl;
-    cout<<" TO ACCOUNT  "<<account_num<<endl<<endl;
-    cout<<" AMOUNT DEPOSITED  R"<<depositCash<<endl<<endl;
+    cout<<" CUSTOMER NAME      "<<name[0]<<" "<<surname<<endl<<endl;
+    cout<<" TO ACCOUNT         "<<account_num<<endl<<endl;
+    cout<<" AMOUNT DEPOSITED    R"<<depositCash<<endl<<endl;
     cout<<"========================================================="<<endl;
 }
 void withdraw(double balance)
@@ -80,10 +81,10 @@ void withdraw(double balance)
         cout<<"                                CASH WITHDRAWAL RECEIPT"<<endl<<endl;
         cout<<" TRANSACTION DATE   "<<ctime(&now)<<endl;
         cout<<" BUSINESS DATE      "<<ctime(&now)<<endl<<endl;
-        cout<<" FROM ACCOUNT   "<<"*************"<<to_string(account_numbers[getIndex]).substr(4, 4)<<endl<<endl;
-        cout<<" AMOUNT WITHDRAWN  R-"<<withdrawCash<<endl<<endl;
-        cout<<" AVAILABE FUNDS  R"<<balance<<endl<<endl;
-        cout<<" ACCOUNT BALANCE  R"<<balance<<endl;
+        cout<<" FROM ACCOUNT        "<<"*************"<<to_string(account_numbers[getIndex]).substr(4, 4)<<endl<<endl;
+        cout<<" AMOUNT WITHDRAWN   R -"<<withdrawCash<<endl<<endl;
+        cout<<" AVAILABE FUNDS     R "<<balance<<endl<<endl;
+        cout<<" ACCOUNT BALANCE    R "<<balance<<endl;
         cout<<"========================================================="<<endl;
     }
 }
@@ -92,7 +93,7 @@ void sendCash(double balance)
     vector <string> names = {};
     vector <string> surnames = {};
     vector <int> accounts = {};
-    string name, surname;
+    string name, surname, acc_ref;
     int account_number, index;
     double sendCashAmount;
     balance = balances[getIndex];
@@ -111,10 +112,13 @@ void sendCash(double balance)
         cout<<"Enter benefiacry account number"<<endl;
         cout<<"= ";
         cin>>account_number;
+        cout<<"Enter beneficiary reference"<<endl;
+        cout<<"= ";
+        getline(cin, acc_ref);
+
 
         if (isalpha(name[0]) && isalpha(surname[0]) && account_number == account_numbers[0] && name == "Nhlamulo" && account_num != account_numbers[0] || account_number == account_numbers[1]  && name == "Ocean" && account_num != account_numbers[1] || account_number == account_numbers[2]  && name == "Liyema" && account_num != account_numbers[2] || account_number == account_numbers[3]  && name == "Martin" && account_num != account_numbers[3] )
         {
-               cout<<"horray"<<endl;
                 cout<<"Enter amount"<<endl;
                 cout<<"=R";
                 cin>>sendCashAmount;
@@ -134,7 +138,16 @@ void sendCash(double balance)
                     balances[index] = balances[index] += sendCashAmount;
                     balances[getIndex] = balance -= sendCashAmount;
                     balance = balances[getIndex];
-                    cout<<"Remaining Balance: R"<<balance<<endl;
+
+                    cout<<"========================================================="<<endl;
+                    cout<<" NB SMART BANKING SYSTEMS             Transaction record"<<endl<<endl;
+                    cout<<"                                PROOF OF PAYMENT"<<endl<<endl;
+                    cout<<" BENEFICIARY NAME            "<<"MR "<<name[0]<<" "<<surname<<endl;
+                    cout<<" BENEFICIARY ACCOUNT NUMBER        "<<account_number<<endl;
+                    cout<<" BENEFICIARY REFERENCE        "<<acc_ref<<endl;
+                    cout<<" AMOUNT    R "<<sendCashAmount<<endl<<endl;
+                    cout<<" TRANSACTION DATE   "<<ctime(&now)<<endl;
+                    cout<<"========================================================="<<endl;
                 }
                 else
                 {
