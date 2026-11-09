@@ -1,0 +1,190 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+//user details stored inside arrays
+string usernames[4] = {"Nhlamulo","Ocean","Liyema","Martin"};
+string surnames[4] = {"Baloyi","Chirwa","Goloza","Chuine"};
+string pins[4] = {"0625","0514","0524","0824"};
+int account_numbers[4] = {20154545, 20456942, 20649863, 20348548};
+double balances[4] = {0, 10, 25, 30};
+//Logged in user details
+string name, surname;
+int account_num;
+int getIndex;
+double balance = balances[getIndex];
+//menu option
+int option;
+
+void checkBalance(double balance)
+{
+    balance = balances[getIndex];
+    cout<<"======================="<<endl;
+    cout<<"Account Details"<<endl;
+    cout<<"======================="<<endl;
+    cout<<"Account Holder: MR "<<name[0]<<" "<<surname<<endl;
+    cout<<"Account number: "<<account_num<<endl;
+    cout<<"Balance: R"<<balance<<endl;
+}
+void deposit(double balance, string name)
+{
+    double depositCash, avail_balance;
+    balance = balances[getIndex];
+    cout<<"Enter amount to deposit"<<endl;
+    cout<<"=R";
+    cin>>depositCash;
+    avail_balance = balance += depositCash;
+    balances[getIndex] = avail_balance;
+    balance = balances[getIndex];
+
+
+    cout<<"======================="<<endl;
+    cout<<"Access granted"<<endl;
+    cout<<"Name: "<<name<<endl;
+    cout<<"Account num: "<<account_num<<endl;
+    cout<<"Balance: R"<<balance<<endl;
+    cout<<"Balance: R"<<balances[getIndex]<<endl;
+    cout<<"======================="<<endl;
+}
+void withdraw(double balance)
+{
+    double withdrawCash, avail_balance;
+    balance = balances[getIndex];
+
+    cout<<"Enter amount to withdraw"<<endl;
+    cout<<"=R";
+    cin>>withdrawCash;
+
+    if (balance < withdrawCash)
+    {
+        cout<<"You have insufficent funds"<<endl;
+    }
+    else
+    {
+        avail_balance = balance -= withdrawCash;
+        balances[getIndex] = avail_balance;
+        balance = balances[getIndex];
+    }
+}
+void sendCash(double balance)
+{
+    cout<<"======================="<<endl;
+    cout<<"Account Details"<<endl;
+    cout<<"======================="<<endl;
+}
+//function to validate authentication user input
+void validateAuthInput(string username, string pin)
+{
+        if (username.length() <= 0 || pin.length() != 4)
+        {
+            cout<<""<<endl;
+        }
+}
+
+  bool isUser = false;
+//function for authentication
+void authentication()
+{
+    cout<<"============================"<<endl;
+    cout<<" NB SMART BANKING SYSTEMS"<<endl;
+    cout<<"============================"<<endl;
+
+
+    string username,pin;
+
+
+
+    do
+    {
+        cout<<"        LOGIN"<<endl<<endl;
+        cout<<"Username: "<<endl;
+        cin>>username;
+        cout<<"Pin: "<<endl;
+        cin>>pin;
+
+        validateAuthInput(username, pin);
+
+        for (int i = 0; i < 4; i++)
+        {
+            if (usernames[i] == username && pins[i] == pin)
+            {
+                getIndex = i;
+                isUser = true;
+                name = usernames[i];
+                surname = surnames[i];
+                account_num = account_numbers[i];
+                balance = balances[i];
+            }
+
+
+        }
+
+        if (isUser == false)
+        {
+            cout<<"username or pin is invalid"<<endl;
+            cout<<"============================"<<endl;
+        }
+        else
+        {
+            cout<<"Access granted"<<endl;
+        }
+
+    } while(username.length() != 0 && pin.length() != 4);
+
+}
+void menu()
+{
+
+    cout<<"======================="<<endl;
+    cout<<"Welcome back "<<name<<endl;
+    cout<<"======================="<<endl;
+    cout<<"Choose option"<<endl;
+    cout<<"1. Check Balance & Account Details"<<endl;
+    cout<<"2. Deposit Cash"<<endl;
+    cout<<"3. Withdraw Cash"<<endl;
+    cout<<"4. Sign out"<<endl;
+    cout<<"0. Exit"<<endl;
+    cout<<"= ";
+    cin>>option;
+
+    switch(option)
+    {
+    case 1:
+        checkBalance(balance);
+        break;
+    case 2:
+        deposit(balance, name);
+        break;
+    case 3:
+        withdraw(balance);
+        break;
+    case 4:
+        authentication();
+        break;
+    default:
+        cout<<"Exiting program.."<<endl;
+        break;
+    }
+}
+int main ()
+{
+    authentication();
+    if (isUser == false)
+    {
+        do
+        {
+            authentication();
+        } while(isUser != true);
+    }
+    else
+    {
+        do
+        {
+            menu();
+
+        } while(option != 0);
+    }
+
+
+    return 0;
+}
