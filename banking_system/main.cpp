@@ -72,30 +72,15 @@ void sendCash(double balance)
     vector <string> surnames = {};
     vector <int> accounts = {};
     string name, surname;
-    int option, account_number;
+    int account_number, index;
+    double sendCashAmount;
+    balance = balances[getIndex];
 
     cout<<"======================="<<endl;
     cout<<"    Beneficiaries"<<endl;
     cout<<"======================="<<endl;
 
-    cout<<"Choose option"<<endl;
-    cout<<"1. View Beneficiaries"<<endl;
-    cout<<"2. Add a beneficiary"<<endl;
-    cout<<"=";
-    cin>>option;
 
-
-
-
-    switch(option)
-    {
-    case 1:
-        for (int i = 0; i < names.size(); i++)
-        {
-            cout<<i+1<<". "<<names[i]<<endl;
-        }
-        break;
-    case 2:
         cout<<"Enter benefiacry name"<<endl;
         cout<<"= ";
         cin>>name;
@@ -109,6 +94,32 @@ void sendCash(double balance)
         if (isalpha(name[0]) && isalpha(surname[0]) && account_number == account_numbers[0] && name == "Nhlamulo" && account_num != account_numbers[0] || account_number == account_numbers[1]  && name == "Ocean" && account_num != account_numbers[1] || account_number == account_numbers[2]  && name == "Liyema" && account_num != account_numbers[2] || account_number == account_numbers[3]  && name == "Martin" && account_num != account_numbers[3] )
         {
                cout<<"horray"<<endl;
+                cout<<"Enter amount"<<endl;
+                cout<<"=R";
+                cin>>sendCashAmount;
+
+                for (int i = 0; i < 4; i++)
+                {
+                    if(name == usernames[i])
+                    {
+                        index = i;
+                        cout<<"Index: "<<index<<endl;
+                        cout<<usernames[i]<<endl;
+                    }
+                }
+
+                if (balance >= sendCashAmount)
+                {
+                    balances[index] = balances[index] += sendCashAmount;
+                    balances[getIndex] = balance -= sendCashAmount;
+                    balance = balances[getIndex];
+                    cout<<"Remaining Balance: R"<<balance<<endl;
+                }
+                else
+                {
+                    cout<<"You have insufficient funds"<<endl;
+                }
+
         }
         else
         {
@@ -116,7 +127,6 @@ void sendCash(double balance)
         }
 
 
-    }
 }
 //function to validate authentication user input
 void validateAuthInput(string username, string pin)
