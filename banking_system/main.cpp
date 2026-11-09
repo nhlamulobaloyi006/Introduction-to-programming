@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <ctime>
 
 using namespace std;
 //user details stored inside arrays
@@ -13,6 +14,9 @@ string name, surname;
 int account_num;
 int getIndex;
 double balance = balances[getIndex];
+//TIME
+    time_t now = time(0);
+
 //menu option
 int option;
 
@@ -38,13 +42,16 @@ void deposit(double balance, string name)
     balance = balances[getIndex];
 
 
-    cout<<"======================="<<endl;
-    cout<<"Access granted"<<endl;
-    cout<<"Name: "<<name<<endl;
-    cout<<"Account num: "<<account_num<<endl;
-    cout<<"Balance: R"<<balance<<endl;
-    cout<<"Balance: R"<<balances[getIndex]<<endl;
-    cout<<"======================="<<endl;
+
+    cout<<"========================================================="<<endl;
+    cout<<" NB SMART BANKING SYSTEMS             Transaction record"<<endl<<endl;
+    cout<<"                                CASH DEPOSIT RECEIPT"<<endl<<endl;
+    cout<<" TRANSACTION DATE   "<<ctime(&now)<<endl;
+    cout<<" BUSINESS DATE      "<<ctime(&now)<<endl<<endl;
+    cout<<" CUSTOMER NAME   "<<name[0]<<" "<<surname<<endl<<endl;
+    cout<<" TO ACCOUNT  "<<account_num<<endl<<endl;
+    cout<<" AMOUNT DEPOSITED  R"<<depositCash<<endl<<endl;
+    cout<<"========================================================="<<endl;
 }
 void withdraw(double balance)
 {
@@ -61,9 +68,23 @@ void withdraw(double balance)
     }
     else
     {
+        string convert, last_four_digits;
+        convert = account_numbers[getIndex];
+        cout<<account_numbers[getIndex]<<endl;
         avail_balance = balance -= withdrawCash;
         balances[getIndex] = avail_balance;
         balance = balances[getIndex];
+
+        cout<<"========================================================="<<endl;
+        cout<<" NB SMART BANKING SYSTEMS             Transaction record"<<endl<<endl;
+        cout<<"                                CASH WITHDRAWAL RECEIPT"<<endl<<endl;
+        cout<<" TRANSACTION DATE   "<<ctime(&now)<<endl;
+        cout<<" BUSINESS DATE      "<<ctime(&now)<<endl<<endl;
+        cout<<" FROM ACCOUNT   "<<"*************"<<to_string(account_numbers[getIndex]).substr(4, 4)<<endl<<endl;
+        cout<<" AMOUNT WITHDRAWN  R-"<<withdrawCash<<endl<<endl;
+        cout<<" AVAILABE FUNDS  R"<<balance<<endl<<endl;
+        cout<<" ACCOUNT BALANCE  R"<<balance<<endl;
+        cout<<"========================================================="<<endl;
     }
 }
 void sendCash(double balance)
@@ -229,6 +250,7 @@ void menu()
 }
 int main ()
 {
+
     authentication();
     if (isUser == false)
     {
