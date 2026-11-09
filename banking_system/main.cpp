@@ -68,9 +68,57 @@ void withdraw(double balance)
 }
 void sendCash(double balance)
 {
+    vector <string> names = {};
+    vector <string> surnames = {};
+    vector <int> accounts = {};
+    string name, surname;
+    int option, account_number;
+
     cout<<"======================="<<endl;
-    cout<<"Account Details"<<endl;
+    cout<<"    Beneficiaries"<<endl;
     cout<<"======================="<<endl;
+
+    cout<<"Choose option"<<endl;
+    cout<<"1. View Beneficiaries"<<endl;
+    cout<<"2. Add a beneficiary"<<endl;
+    cout<<"=";
+    cin>>option;
+
+
+
+
+    switch(option)
+    {
+    case 1:
+        for (int i = 0; i < names.size(); i++)
+        {
+            cout<<i+1<<". "<<names[i]<<endl;
+        }
+        break;
+    case 2:
+        cout<<"Enter benefiacry name"<<endl;
+        cout<<"= ";
+        cin>>name;
+        cout<<"Enter benefiacry surname"<<endl;
+        cout<<"= ";
+        cin>>surname;
+        cout<<"Enter benefiacry account number"<<endl;
+        cout<<"= ";
+        cin>>account_number;
+
+        if (isalpha(name[0]) && isalpha(surname[0]) && account_number == account_numbers[0] && name == "Nhlamulo" || account_number == account_numbers[1]  && name == "Ocean" || account_number == account_numbers[2]  && name == "Liyema" || account_number == account_numbers[3]  && name == "Martin" )
+        {
+               cout<<"horray"<<endl;
+
+
+        }
+        else
+        {
+            cout<<"Invalid input, please try again"<<endl;
+        }
+
+
+    }
 }
 //function to validate authentication user input
 void validateAuthInput(string username, string pin)
@@ -142,7 +190,8 @@ void menu()
     cout<<"1. Check Balance & Account Details"<<endl;
     cout<<"2. Deposit Cash"<<endl;
     cout<<"3. Withdraw Cash"<<endl;
-    cout<<"4. Sign out"<<endl;
+    cout<<"4. Send Cash"<<endl;
+    cout<<"5. Sign out"<<endl;
     cout<<"0. Exit"<<endl;
     cout<<"= ";
     cin>>option;
@@ -159,7 +208,11 @@ void menu()
         withdraw(balance);
         break;
     case 4:
+        sendCash(balance);
+        break;
+    case 5:
         authentication();
+        break;
         break;
     default:
         cout<<"Exiting program.."<<endl;
