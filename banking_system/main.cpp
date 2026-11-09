@@ -106,11 +106,9 @@ void sendCash(double balance)
         cout<<"= ";
         cin>>account_number;
 
-        if (isalpha(name[0]) && isalpha(surname[0]) && account_number == account_numbers[0] && name == "Nhlamulo" || account_number == account_numbers[1]  && name == "Ocean" || account_number == account_numbers[2]  && name == "Liyema" || account_number == account_numbers[3]  && name == "Martin" )
+        if (isalpha(name[0]) && isalpha(surname[0]) && account_number == account_numbers[0] && name == "Nhlamulo" && account_num != account_numbers[0] || account_number == account_numbers[1]  && name == "Ocean" && account_num != account_numbers[1] || account_number == account_numbers[2]  && name == "Liyema" && account_num != account_numbers[2] || account_number == account_numbers[3]  && name == "Martin" && account_num != account_numbers[3] )
         {
                cout<<"horray"<<endl;
-
-
         }
         else
         {
